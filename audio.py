@@ -69,9 +69,18 @@ X = np.array(X)
 X2 = scaler.fit_transform(X)
 ind = clf2.predict(X2)
 
-import csv
-with open("audio_emotion.csv", "wb") as csv_file:
-    writer = csv.writer(csv_file, delimiter=',')
+from datetime import datetime, timedelta
+subs = []
+def covTime(msec):
+    a = timedelta(milliseconds=msec)
+    d = datetime.strptime(str(a), '%H:%M:%S.%f')
+    return d.strftime("%H:%M:%S,%f")[:12]
+
+with open("audio_emotion.srt", "wb") as text_file:
     for i, (start_i, end_i) in enumerate(nonsilent):
-        writer.writerow((start_i, end_i, emotions[ind[i]]))
+        text_file.write(str(i+1)+"\n")
+        text_file.write(covTime(start_i)+ " --> " + covTime(end_i) + "\n")
+        text_file.writelines(emotions[ind[i]]+"\n")
+        text_file.writelines("\n")
+
 

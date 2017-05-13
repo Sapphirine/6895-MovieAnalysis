@@ -9,7 +9,7 @@ emotions = ["anger", "contempt", "disgust", "fear", "happy", "neutral", "sadness
 cap = cv2.VideoCapture('Downfall.mp4')
 # Define the codec and create VideoWriter object
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('output.avi',fourcc, 20.0, (1280,720))
+out = cv2.VideoWriter('output.avi', fourcc, 24.0, (1280,720))
 
 # Face detector
 detector = dlib.get_frontal_face_detector()
